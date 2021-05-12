@@ -1,0 +1,56 @@
+PUT _ilm/policy/audit-policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_age": "30d",
+            "max_size": "10mb",
+            "max_docs": 1000
+          },
+          "set_priority": {
+            "priority": 100
+          }
+        }
+      },
+      "delete": {
+        "min_age": "0d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+
+
+
+PUT _template/template_audit
+{
+  "index_patterns": ["audit-index-00000*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "lifecycle": {
+        "name": "audit-policy",
+        "rollover_alias": "index_audits",
+        "indexing_complete": "false"
+      }
+    
+  }
+}
+
+PUT audit-index-000001
+{
+  "settings": {
+    "index.lifecycle.name": "audit-policy",
+    "index.lifecycle.rollover_alias": "index_audits"
+  },
+  "aliases": {
+    "index_audits": {
+      "is_write_index": true
+    }
+  }
+}
