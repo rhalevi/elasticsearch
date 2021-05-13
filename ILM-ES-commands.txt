@@ -15,8 +15,12 @@ PUT _ilm/policy/audit-policy
           }
         }
       },
+      "warm": {
+        "min_age": "2d",
+        "actions": {}
+      },
       "delete": {
-        "min_age": "0d",
+        "min_age": "3d",
         "actions": {
           "delete": {}
         }
