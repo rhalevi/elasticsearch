@@ -49,11 +49,12 @@ async function run () {
     date: new Date()
   }]
 
-  const body = dataset.flatMap(doc => [{ index: { _index: 'tweets' } }, doc])
+  let index_name= "index_audits"
+  const body = dataset.flatMap(doc => [{ index: { _index: index_name } }, doc])
 
   //index the bulk 10 times 
 
-  let numberOfBulks =100;
+  let numberOfBulks =300;
   for(let i=0; i<numberOfBulks;i++){
 
     const { body: bulkResponse } = await client.bulk({ refresh: true, body })
@@ -84,7 +85,7 @@ async function run () {
   }
 
 
-  const { body: count } = await client.count({ index: 'tweets' })
+  const { body: count } = await client.count({ index: index_name })
   console.log(count)
 }
 
