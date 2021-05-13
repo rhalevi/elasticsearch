@@ -41,7 +41,7 @@ PUT _ilm/policy/audit-policy
 
 PUT _template/template_audit
 {
-  "index_patterns": ["audit-index-00000*"],
+  "index_patterns": ["audit-index-*"],
   "settings": {
     "number_of_shards": 1,
     "number_of_replicas": 0,
