@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node scanAndScroll.js"
-
+    "start": "node scanAndScroll.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@elastic/elasticsearch": "^7.10.0"
+    "@elastic/elasticsearch": "^7.10.0",
+    "array.prototype.flatmap": "^1.2.4"
   }
 }
