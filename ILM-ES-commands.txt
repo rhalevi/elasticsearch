@@ -1,3 +1,11 @@
+PUT _cluster/settings
+{
+  "transient": {
+    "indices.lifecycle.poll_interval": "1m" 
+  }
+}
+
+
 PUT _ilm/policy/audit-policy
 {
   "policy": {
